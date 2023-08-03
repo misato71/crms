@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('login_infos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('login_id')->autoIncrement();
+            $table->string('user_id', 50);
+            $table->string('staff_password', 20);
+            $table->timestamp('modified_date')->nullable();
+            $table->string('created_id', 20)->nullable();
+            $table->string('modified_id', 20)->nullable();
         });
     }
 
