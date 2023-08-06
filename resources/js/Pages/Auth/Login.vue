@@ -14,14 +14,12 @@ defineProps({
 });
 
 const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
+    user_id: '',
+    staff_password: '',
 });
 
 const submit = () => {
     form.post(route('login'), {
-        onFinish: () => form.reset('password'),
     });
 };
 </script>
@@ -36,13 +34,13 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="メールアドレス" />
+                <InputLabel for="user_id" value="メールアドレス" />
 
                 <TextInput
-                    id="email"
+                    id="user_id"
                     type="email"
                     class="mt-1 block w-full"
-                    v-model="form.email"
+                    v-model="form.user_id"
                     required
                     autofocus
                     autocomplete="username"
@@ -52,13 +50,13 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="パスワード" />
+                <InputLabel for="staff_password" value="パスワード" />
 
                 <TextInput
-                    id="password"
+                    id="staff_password"
                     type="password"
                     class="mt-1 block w-full"
-                    v-model="form.password"
+                    v-model="form.staff_password"
                     required
                     autocomplete="current-password"
                 />
@@ -66,12 +64,6 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                </label>
-            </div>
             <div class="flex items-center justify-end mt-4">
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     ログイン

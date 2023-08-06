@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('login_infos', function (Blueprint $table) {
             $table->integer('login_id')->autoIncrement();
-            $table->string('user_id', 50);
-            $table->string('staff_password', 20);
+            $table->string('user_id', 50)->nullable();
+            $table->string('staff_password')->nullable();
             $table->timestamp('modified_date')->nullable();
             $table->string('created_id', 20)->nullable();
             $table->string('modified_id', 20)->nullable();

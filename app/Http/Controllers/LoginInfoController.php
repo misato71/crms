@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLoginInfoRequest;
 use App\Http\Requests\UpdateLoginInfoRequest;
 use App\Models\LoginInfo;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+
+
 
 class LoginInfoController extends Controller
 {
@@ -21,15 +26,31 @@ class LoginInfoController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Auth/Login', [
+            'status' => session('status'),
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 認証の試行を処理
      */
     public function store(StoreLoginInfoRequest $request)
     {
-        //
+        $request->validate([
+            'user_id' => ['required', 'email'],
+            'staff_password' => ['required'],
+        ]);
+
+        if (Auth::attempt(['user_id' => $request->user_id, 'staff_password' => $request->staff_password, 'password' => $request->staff_password])) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    
     }
 
     /**
