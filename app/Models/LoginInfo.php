@@ -22,7 +22,7 @@ class LoginInfo extends Authenticatable
         return $this->staff_password;
     }
 
-
+    // タイプスタンプを更新日時カラムに保存
     const CREATED_AT = 'modified_date';
     const UPDATED_AT = 'modified_date';
 

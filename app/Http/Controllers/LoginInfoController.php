@@ -22,7 +22,7 @@ class LoginInfoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  認証画面表示
      */
     public function create()
     {
