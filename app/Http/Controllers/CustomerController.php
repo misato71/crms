@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
+use Inertia\Inertia;
+
 
 class CustomerController extends Controller
 {
@@ -13,7 +15,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::select('customer_id', 'customer_company_name', 'customer_phone', 'customer_address', 'customer_type')->get();
+
+        return Inertia::render('Customers/Index', [
+            'customers' => $customers
+        ]);
     }
 
     /**
@@ -21,7 +27,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Customers/Create');
     }
 
     /**
