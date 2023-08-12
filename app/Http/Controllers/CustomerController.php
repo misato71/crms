@@ -6,16 +6,19 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
 use Inertia\Inertia;
-
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::select('customer_id', 'customer_company_name', 'customer_phone', 'customer_address', 'customer_type')->get();
+        // $customers = Customer::select('customer_id', 'customer_company_name', 'customer_phone', 'customer_address', 'customer_type')->get();
+
+        $customers = Customer::searchCustomers($request->search)
+        ->select('customer_id', 'customer_company_name', 'customer_phone', 'customer_address', 'customer_type')->get();
 
         return Inertia::render('Customers/Index', [
             'customers' => $customers
