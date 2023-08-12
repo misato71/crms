@@ -8,7 +8,8 @@ use App\Models\LoginInfo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 
 class LoginInfoController extends Controller
@@ -78,10 +79,16 @@ class LoginInfoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy an authenticated session.
      */
-    public function destroy(LoginInfo $loginInfo)
+    public function destroy(Request $request): RedirectResponse
     {
-        //
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
