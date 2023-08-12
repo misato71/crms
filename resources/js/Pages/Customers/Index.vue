@@ -21,15 +21,52 @@ defineProps({
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <section class="text-gray-600 body-font">
-                            <div class="container px-5 py-8 mx-auto">
+                            <div class="container px-5 py-22 mx-auto">
+                                <div class="flex">
 
-                                <div class="flex pl-4 my-4 lg:w-2/3 w-full mx-auto">
-                                    <Link as="button" :href="route('customers.create')" class="flex ml-auto rounded-full border border-primary-500 bg-violet-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-primary-700 hover:bg-primary-700 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300">
-                                        New Cumpany
-                                        <span class="ml-2" aria-hidden="true">+</span>
-                                    </Link>
+                                    <!-- 表示件数 -->
+                                    <div class="flex pl-4 my-2 lg:mr-32 w-full mx-auto items-center">
+                                        <p class="text-gray-500">
+                                            <span class="px-2 py-1 text-xs">表示件数
+                                                <span class="text-sm bg-white border border-gray-400 rounded-full px-2 py-1">100</span> 件
+                                            </span>
+                                        </p>        
+                                    </div>
+
+                                    <!-- Search input -->
+                                    <div class="flex pl-4 my-2 w-full mx-auto items-center">
+                                        <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+                                            <div class="absolute my-2 flex items-center pl-2">
+                                            <svg
+                                                class="w-4 h-4"
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                fill-rule="evenodd"
+                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                clip-rule="evenodd"
+                                                ></path>
+                                            </svg>
+                                            </div>
+                                            <input
+                                            class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                                            type="text"
+                                            placeholder="Search here"
+                                            aria-label="Search"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <!-- 顧客登録 -->
+                                    <div class="flex pl-4 my-4 lg:w-2/3 mx-auto">
+                                        <Link as="button" :href="route('customers.create')" class="flex ml-auto rounded-full border border-primary-500 bg-violet-500 px-5 py-2.5 text-center text-xs font-medium text-white shadow-sm transition-all hover:border-primary-700 hover:bg-primary-700 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300">
+                                            <span class="mr-2" aria-hidden="true">+</span>
+                                            新規登録
+                                        </Link>
+                                    </div>
                                 </div>
-
                                 
                                 <div class="">
                                 <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
