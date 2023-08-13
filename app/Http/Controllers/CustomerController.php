@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -38,7 +39,19 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+
+        Customer::create([
+            'customer_company_name' => $request->customer_company_name,
+            'customer_manager_name' => $request->customer_manager_name,
+            'customer_type' => $request->customer_type,
+            'customer_email' => $request->customer_email,
+            'customer_phone' => $request->customer_phone,
+            'customer_address' => $request->customer_address,
+            'our_manager' => $request->our_manager,
+            'created_id' => Auth::id(),
+        ]);
+
+        return to_route('customers.index');
     }
 
     /**

@@ -27,4 +27,22 @@ class Customer extends Model
             }
         }
     }
+
+        /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'customer_company_name',
+        'customer_manager_name',
+        'customer_type',
+        'customer_email',
+        'customer_phone',
+        'customer_address',
+        'our_manager',
+        'created_id',
+        'modified_id',
+    ];
+
 }
