@@ -2,7 +2,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
-import { reactive } from 'vue'
+import { reactive } from 'vue';
+
 
 
 defineProps({ errors: Object })

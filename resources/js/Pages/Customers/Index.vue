@@ -3,10 +3,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
 import { ref } from 'vue'
+import MicroModal from '@/Components/MicroModal.vue'
 
 
 defineProps({
-    customers: Array
+    customers: Array,
 })
 
 const search = ref('')
@@ -40,7 +41,7 @@ const searchCustomers = () => {
                                             <span class="px-2 py-1 text-xs">表示件数
                                                 <span class="text-sm bg-white border border-gray-400 rounded-full px-2 py-1">100</span> 件
                                             </span>
-                                        </p>        
+                                        </p>   
                                     </div>
 
                                     <!-- Search input -->
@@ -69,16 +70,11 @@ const searchCustomers = () => {
                                             aria-label="Search"
                                             />
                                         </div>
-                                        <!-- <input type="text" name="search" v-model="search"> -->
-                                        <!-- <button class="bg-blue-300 text-white py-2 px-2" @click="searchCustomers">検索</button> -->
                                     </div>
 
                                     <!-- 顧客登録 -->
                                     <div class="flex pl-4 my-4 lg:w-2/3 mx-auto">
-                                        <Link as="button" :href="route('customers.create')" class="flex ml-auto rounded-full border border-primary-500 bg-violet-500 px-5 py-2.5 text-center text-xs font-medium text-white shadow-sm transition-all hover:border-primary-700 hover:bg-primary-700 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300">
-                                            <span class="mr-2" aria-hidden="true">+</span>
-                                            新規登録
-                                        </Link>
+                                        <MicroModal />
                                     </div>
                                 </div>
                                 
