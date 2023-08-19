@@ -9,6 +9,7 @@ class Customer extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'customer_id';
     const CREATED_AT = 'modified_date';
     const UPDATED_AT = 'modified_date';
 

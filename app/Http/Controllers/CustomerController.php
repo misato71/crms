@@ -51,7 +51,6 @@ class CustomerController extends Controller
             'created_id' => Auth::id(),
         ]);
 
-        return to_route('customers.index');
     }
 
     /**
@@ -83,6 +82,13 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return to_route('customers.index')
+        ->with([
+            'message' => '顧客会社を削除しました。',
+            'status' => 'danger'
+        ]);
+
     }
 }

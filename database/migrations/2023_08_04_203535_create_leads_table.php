@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('created_id', 20)->nullable();
             $table->string('modified_id', 20)->nullable();
 
-            $table->foreign('lead_company')->references('customer_id')->on('customers');
+            $table->foreign('lead_company')->references('customer_id')->on('customers')->onDelete('cascade');
         });
     }
 
