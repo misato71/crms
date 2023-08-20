@@ -19,7 +19,7 @@ class CustomerController extends Controller
         // $customers = Customer::select('customer_id', 'customer_company_name', 'customer_phone', 'customer_address', 'customer_type')->get();
 
         $customers = Customer::searchCustomers($request->search)
-        ->select('customer_id', 'customer_company_name', 'customer_phone', 'customer_address', 'customer_type')->get();
+        ->select('customer_id', 'customer_company_name', 'customer_manager_name', 'customer_email', 'customer_phone', 'customer_address', 'customer_type', 'our_manager', 'modified_date')->get();
 
         return Inertia::render('Customers/Index', [
             'customers' => $customers
@@ -58,7 +58,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        // $showCustomer = Customer::findOrFail($customer); // 顧客情報をデータベースから取得
+        // return response()->json($showCustomer); // JSON形式で顧客情報を返す
     }
 
     /**
