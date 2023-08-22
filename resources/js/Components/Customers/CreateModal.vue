@@ -4,7 +4,6 @@ import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 import axios from 'axios';
 import { usePage } from '@inertiajs/vue3';
-import MicroModal from 'micromodal';
 
 
 // micromodalの閉じるボタン
@@ -15,7 +14,7 @@ const toggleStatus = () => { isShow.value = !isShow.value}
 const form = reactive({
   customer_company_name: null,
   customer_manager_name: null,
-  customer_type: null,
+  customer_type: '',
   customer_email: null,
   customer_phone: null,
   customer_address: null,
