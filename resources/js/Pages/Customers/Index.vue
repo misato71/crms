@@ -10,6 +10,7 @@ import FlashMessage from '@/Components/FlashMessage.vue'
 
 defineProps({
     customers: Array,
+    customerCount: Array,
 })
 
 const search = ref('')
@@ -59,7 +60,7 @@ const deleteCustomer = (customer) => {
                                     <div class="flex pl-4 my-2 lg:mr-32 w-full mx-auto items-center">
                                         <p class="text-gray-500">
                                             <span class="px-2 py-1 text-xs">表示件数
-                                                <span class="text-sm bg-white border border-gray-400 rounded-full px-2 py-1">100</span> 件
+                                                <span class="text-sm bg-white border border-gray-400 rounded-full px-2 py-1">{{ customerCount }}</span> 件
                                             </span>
                                         </p>   
                                     </div>

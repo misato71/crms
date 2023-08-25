@@ -21,8 +21,11 @@ class CustomerController extends Controller
         $customers = Customer::searchCustomers($request->search)
         ->select('customer_id', 'customer_company_name', 'customer_manager_name', 'customer_email', 'customer_phone', 'customer_address', 'customer_type', 'our_manager', 'modified_date')->get();
 
+        $customerCount = $customers->count();
+
         return Inertia::render('Customers/Index', [
-            'customers' => $customers
+            'customers' => $customers,
+            'customerCount' => $customerCount,
         ]);
     }
 
