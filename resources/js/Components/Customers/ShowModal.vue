@@ -10,8 +10,10 @@ const props = defineProps({
   customer: Object
 })
 
+// 初期状態は詳細画面を表示
 const currentModal = ref('show');
 
+// 編集画面へ遷移
 const switchToEditModal = () => {
   currentModal.value = 'edit';
 };
@@ -40,11 +42,31 @@ const validationErrors = ref({});
 const confirmAndUpdate = () => {
   const confirmationMessage = "この内容で編集してよろしいですか？";
   if (confirm(confirmationMessage)) {
-  createCustomer();
+  updateCustomer(props.customer.customer_id);
   } else {
     console.log('キャンセル');
   }
 }
+
+const updateCustomer = async (id) => {
+  try {
+    await axios.put('/api/customers/'+ id, form);
+    // index画面にリダイレクト
+    router.visit('/customers')
+    
+    reset()
+
+  } catch (error) {
+    if (error.response && error.response.status === 422) {
+      // バリデーションエラーメッセージをセット
+      validationErrors.value = error.response.data.errors;
+    } else {
+      その他のエラーハンドリング
+      console.log(error);
+    }
+  }
+};
+
 
 
 
@@ -149,6 +171,26 @@ const confirmAndUpdate = () => {
           </header>
 
           <main class="modal__content" id="modal-1-content">
+
+            <!-- バリデーションエラーメッセージを表示 -->
+            <div v-if="Object.keys(validationErrors).length > 0" class="col-span-12 pl-2 pb-6">
+              <div class="flex rounded-md bg-red-50 p-4 text-sm text-red-500" x-cloak x-show="showAlert" x-data="{ showAlert: true }">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-3 h-5 w-5 flex-shrink-0">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <h4 class="font-bold">Error</h4>
+                  <div class="mt-1">
+                    <ul class="list-inside list-disc">
+                      <li v-for="(errors, field) in validationErrors" :key="field">
+                        {{ errors[0] }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="mx-auto max-w-xl">
               <div class="grid grid-cols-12 gap-5">
 

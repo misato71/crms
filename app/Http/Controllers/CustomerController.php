@@ -31,7 +31,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        // return Inertia::render('Customers/Create');
+        //
     }
 
     /**
@@ -58,8 +58,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        // $showCustomer = Customer::findOrFail($customer); // 顧客情報をデータベースから取得
-        // return response()->json($showCustomer); // JSON形式で顧客情報を返す
+        //
     }
 
     /**
@@ -75,7 +74,16 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        
+        $customer->customer_company_name = $request->customer_company_name;
+        $customer->customer_manager_name = $request->customer_manager_name;
+        $customer->customer_type = $request->customer_type;
+        $customer->customer_email = $request->customer_email;
+        $customer->customer_phone = $request->customer_phone;
+        $customer->customer_address = $request->customer_address;
+        $customer->our_manager = $request->our_manager;
+        $customer->modified_id = Auth::id();
+        $customer->save();
     }
 
     /**

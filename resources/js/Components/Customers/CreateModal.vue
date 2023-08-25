@@ -25,7 +25,7 @@ const form = reactive({
 const reset = () => {
   MicroModal.init({
   disableScroll: true, 
-})
+  })
 };
 
 // エラーメッセージ
@@ -45,7 +45,6 @@ const confirmAndCreate = () => {
 const createCustomer = async () => {
   try {
     const response = await axios.post('/api/customers', form);
-    console.log('登録しました');
 
     // index画面にリダイレクト
     router.visit('/customers')
