@@ -12,11 +12,14 @@ use Illuminate\Support\Facades\Auth;
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * すべての顧客情報を取得、又は検索BOXで入力された場合は、データと一致する顧客情報を取得
+     * 顧客情報の件数を取得
+     * @param　Illuminate\Http\Request $request 検索BOXで入力されたデータ
+     * @param Array $customers 取得した顧客情報
+     * @param Number $customerCount 顧客情報の件数
      */
     public function index(Request $request)
     {
-        // $customers = Customer::select('customer_id', 'customer_company_name', 'customer_phone', 'customer_address', 'customer_type')->get();
 
         $customers = Customer::searchCustomers($request->search)
         ->select('customer_id', 'customer_company_name', 'customer_manager_name', 'customer_email', 'customer_phone', 'customer_address', 'customer_type', 'our_manager', 'modified_date')->get();
@@ -38,7 +41,8 @@ class CustomerController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 顧客情報の新規登録機能
+     * @param App\Http\Requests\StoreCustomerRequest $request　登録する顧客情報
      */
     public function store(StoreCustomerRequest $request)
     {
@@ -73,7 +77,9 @@ class CustomerController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 顧客情報の編集機能
+     * @param App\Models\Customer $customer　データベースに保存されてる顧客情報
+     * @param App\Http\Requests\UpdateCustomerRequest $request 編集した顧客情報
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
@@ -90,7 +96,8 @@ class CustomerController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 顧客情報の削除機能
+     * @param App\Models\Customer $customer　削除する顧客情報
      */
     public function destroy(Customer $customer)
     {

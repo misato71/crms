@@ -32,7 +32,7 @@ const reset = () => {
 const validationErrors = ref({});
 
 
-// 新規登録確認ダイアログ
+// 新規登録　確認ダイアログ
 const confirmAndCreate = () => {
   const confirmationMessage = "この内容で登録してよろしいですか？";
   if (confirm(confirmationMessage)) {

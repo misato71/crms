@@ -23,7 +23,7 @@ class LoginInfoController extends Controller
     }
 
     /**
-     *  認証画面表示
+     *  ログイン画面表示
      */
     public function create()
     {
@@ -33,7 +33,9 @@ class LoginInfoController extends Controller
     }
 
     /**
+     * ログイン機能
      * 認証の試行を処理
+     * @param App\Http\Requests\StoreLoginInfoRequest $request メールアドレスとパスワード
      */
     public function store(StoreLoginInfoRequest $request)
     {
@@ -80,7 +82,8 @@ class LoginInfoController extends Controller
     }
 
     /**
-     * Destroy an authenticated session.
+     * ログアウト機能
+     * @param Illuminate\Http\Request $request
      */
     public function destroy(Request $request): RedirectResponse
     {

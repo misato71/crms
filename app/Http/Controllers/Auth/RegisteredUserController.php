@@ -26,8 +26,8 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
-     *
+     * ログイン情報　新規登録
+     * Illuminate\Http\Request $request メールアドレスとパスワード
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse

@@ -9,10 +9,27 @@ class Customer extends Model
 {
     use HasFactory;
 
+
+     /**
+     * customer_id　主キーを指定
+     */
     protected $primaryKey = 'customer_id';
+
+
+     /**
+     * タイプスタンプを更新日時カラムに保存
+     *
+     * @param timestamp CREATED_AT 
+     * @param timestamp UPDATED_AT 
+     */
     const CREATED_AT = 'modified_date';
     const UPDATED_AT = 'modified_date';
 
+    /**
+     * 顧客情報　customersテーブルから取得
+     * 検索BOXに入力されたデータと一致する顧客情報を取得
+     * @var array<int, string>
+     */
     public function scopeSearchCustomers($query, $input = null)
     {
         if(!empty($input)){
@@ -29,8 +46,8 @@ class Customer extends Model
         }
     }
 
-        /**
-     * The attributes that are mass assignable.
+    /**
+     * 顧客情報　新規登録
      *
      * @var array<int, string>
      */

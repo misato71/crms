@@ -38,7 +38,7 @@ const form = reactive({
 const validationErrors = ref({});
 
 
-// ダイアログ
+// 編集　確認ダイアログ
 const confirmAndUpdate = () => {
   const confirmationMessage = "この内容で編集してよろしいですか？";
   if (confirm(confirmationMessage)) {

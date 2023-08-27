@@ -12,23 +12,37 @@ class LoginInfo extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // テーブル名と主キーを指定
+
+     /**
+     * login_infos テーブル名を指定
+     * login_id　主キーを指定
+     */
     protected $table = 'login_infos';
     protected $primaryKey = 'login_id';
 
-    // パスワードカラムを指定
-    public function getAuthPassword()
-    {
-        return $this->staff_password;
-    }
 
-    // タイプスタンプを更新日時カラムに保存
+     /**
+     * タイプスタンプを更新日時カラムに保存
+     *
+     * @param timestamp CREATED_AT 
+     * @param timestamp UPDATED_AT 
+     */
     const CREATED_AT = 'modified_date';
     const UPDATED_AT = 'modified_date';
 
 
      /**
-     * The attributes that are mass assignable.
+     * パスワードカラムを指定
+     *
+     */
+    public function getAuthPassword()
+    {
+        return $this->staff_password;
+    }
+
+
+     /**
+     * ログイン情報を新規登録
      *
      * @var array<int, string>
      */

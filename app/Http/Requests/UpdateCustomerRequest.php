@@ -15,7 +15,7 @@ class UpdateCustomerRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * 顧客情報の編集機能　バリデーション
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
