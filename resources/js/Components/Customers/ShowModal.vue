@@ -152,7 +152,7 @@ const updateCustomer = async (id) => {
               </div>
               
               <div class="col-span-12 pl-2">
-                <button @click="switchToEditModal" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">編集</button>
+                <button @click="switchToEditModal" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">更新</button>
               </div>
             </div>
           </div>
@@ -243,7 +243,7 @@ const updateCustomer = async (id) => {
               </div>
               
               <div class="col-span-12 pl-2">
-                <button @click="confirmAndUpdate" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">編集する</button>
+                <button @click="confirmAndUpdate" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">更新する</button>
               </div>
               </div>
             </div>
@@ -252,7 +252,7 @@ const updateCustomer = async (id) => {
         </div>
 
         <footer class="modal__footer">
-          <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+          <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">キャンセル</button>
         </footer>
       </div>
     </div>
