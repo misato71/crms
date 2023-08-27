@@ -12,6 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            LoginInfoSeeder::class,
+        ]);
+        
+        \App\Models\Customer::factory(100)->create();
+        \App\Models\Lead::factory(100)->create();
+        \App\Models\Staff::factory(100)->create();
+
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

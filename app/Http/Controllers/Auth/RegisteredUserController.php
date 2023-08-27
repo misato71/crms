@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\LoginInfo;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -25,22 +26,21 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
-     *
+     * ログイン情報　新規登録
+     * Illuminate\Http\Request $request メールアドレスとパスワード
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'user_id' => 'required|string|email|max:50|unique:'.LoginInfo::class,
+            'staff_password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        $user = LoginInfo::create([
+            'user_id' => $request->user_id,
+            'staff_password' => Hash::make($request->staff_password),
+            'created_id' => Auth::id(),
         ]);
 
         event(new Registered($user));

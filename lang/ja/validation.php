@@ -247,6 +247,13 @@ return [
         'updated_at' => '更新日',
         'username' => 'ユーザー名',
         'year' => '年',
+        'customer_company_name' => '顧客会社名',
+        'customer_manager_name' => '顧客担当者名',
+        'customer_type' => '業種',
+        'customer_email' => 'メールアドレス',
+        'customer_phone' => '電話番号',
+        'customer_address' => '住所',
+        'our_manager' => '担当者ID',
     ],
 
 ];
