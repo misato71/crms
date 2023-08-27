@@ -45,11 +45,12 @@ class LoginInfoController extends Controller
         if (Auth::attempt(['user_id' => $request->user_id, 'staff_password' => $request->staff_password, 'password' => $request->staff_password])) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            // return redirect()->intended('dashboard');
+            return Inertia::render('customers.index');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'メールアドレスまたはパスワードが正しくありません',
         ])->onlyInput('email');
     
     }

@@ -10,7 +10,7 @@ import FlashMessage from '@/Components/FlashMessage.vue'
 
 const props = defineProps({
     customers: Array,
-    customerCount: Array,
+    customerCount: Number,
 })
 
 // 検索で入力された値をいれる変数
