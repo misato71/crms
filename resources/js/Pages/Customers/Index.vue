@@ -40,13 +40,19 @@ if (key === sortKey.value) {
     sort.value = 'sort'
 };
 
+//　ソート順に処理
 const sortedCustomers = computed(() => {
     const sorted = [...props.customers];
-    console.log([sortKey.value])
+    console.log(sorted)
 
     sorted.sort((a, b) => {
-        const keyA = a[sortKey.value].toLowerCase();
-        const keyB = b[sortKey.value].toLowerCase();
+        const keyA = a[sortKey.value];
+        const keyB = b[sortKey.value];
+
+        // nullの場合は無視してソート
+        if (keyA === null && keyB === null) return 0; 
+        if (keyA === null) return 1; 
+        if (keyB === null) return -1;
 
         if (sortDirection.value === 'asc') {
             return keyA.localeCompare(keyB);
@@ -84,8 +90,8 @@ const deleteCustomer = (customer) => {
         </template>
 
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-4">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 max-h-[calc(100vh-150px)] overflow-y-auto">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <section class="text-gray-600 body-font">
