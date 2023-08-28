@@ -5,7 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\LeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,10 @@ Route::get('/', function () {
 
 Route::resource('customers', CustomerController::class)
 ->middleware(['auth', 'verified']);
+
+Route::resource('leads', LeadController::class)
+->middleware(['auth', 'verified']);
+
 
 
 // Route::get('/', function () {

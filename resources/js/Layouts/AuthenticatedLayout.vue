@@ -165,7 +165,7 @@ const showingNavigationDropdown = ref(false);
                         <li class="relative px-6 py-3">
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
-                            href="tables.html"
+                            :href="route('leads.index')"
                         >
                             <svg
                             class="w-5 h-5"
