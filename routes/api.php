@@ -25,6 +25,9 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
 ->post('/leads', [LeadController::class, 'store']);
 
+Route::middleware('auth:sanctum')
+->put('/leads/{lead}', [LeadController::class, 'update']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

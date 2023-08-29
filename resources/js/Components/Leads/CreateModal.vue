@@ -50,9 +50,6 @@ const createLead = async () => {
     if (error.response && error.response.status === 422) {
       // バリデーションエラーメッセージをセット
       validationErrors.value = error.response.data.errors;
-    } else if (error.response && error.response.status === 500) {
-      // カスタムエラーメッセージをセット
-      validationErrors.value.errors = ['顧客会社のIDが存在しません。'];
     } else {
       // その他のエラーハンドリング
       console.log(error);

@@ -255,6 +255,8 @@ return [
         'customer_address' => '住所',
         'our_manager' => '担当者ID',
         'lead_name' => 'リード名',
+        'status' => 'ステータス',
+        'lead_company' => '顧客ID',
     ],
 
 ];

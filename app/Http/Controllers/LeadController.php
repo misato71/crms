@@ -72,11 +72,18 @@ class LeadController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * リード情報の編集機能
+     * @param App\Models\Lead $lead　データベースに保存されてるリード情報
+     * @param App\Http\Requests\UpdateLeadRequest $request 編集したリード情報
      */
     public function update(UpdateLeadRequest $request, Lead $lead)
     {
-        //
+        $lead->lead_name = $request->lead_name;
+        $lead->status = $request->status;
+        $lead->lead_company = $request->lead_company;
+        $lead->modified_id = Auth::id();
+        $lead->save();
+
     }
 
     /**
@@ -92,7 +99,6 @@ class LeadController extends Controller
             'message' => 'リード名を削除しました。',
             'status' => 'danger'
         ]);
-
 
     }
 }
