@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::resource('customers', CustomerController::class)
 ->middleware(['auth', 'verified']);
 
+
 Route::resource('leads', LeadController::class)
 ->middleware(['auth', 'verified']);
 

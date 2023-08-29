@@ -254,6 +254,7 @@ return [
         'customer_phone' => '電話番号',
         'customer_address' => '住所',
         'our_manager' => '担当者ID',
+        'lead_name' => 'リード名',
     ],
 
 ];

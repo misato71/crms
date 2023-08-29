@@ -46,7 +46,7 @@ class Lead extends Model
     }
 
     /**
-     * リード情報　新規登録
+     * リード情報　登録
      *
      * @var array<int, string>
      */

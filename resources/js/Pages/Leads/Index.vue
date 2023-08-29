@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
 import { ref,computed } from 'vue'
-// import CreateModal from '@/Components/Customers/CreateModal.vue'
+import CreateModal from '@/Components/Leads/CreateModal.vue'
 // import ShowModal from '@/Components/Customers/ShowModal.vue'
 import FlashMessage from '@/Components/FlashMessage.vue'
 import dayjs from 'dayjs'
@@ -149,7 +149,7 @@ const deleteLead = (lead) => {
 
                                     <!-- リード登録 -->
                                     <div class="flex pl-4 my-4 lg:w-2/3 mx-auto">
-                                        <!-- <CreateModal /> -->
+                                        <CreateModal />
                                     </div>
                                 </div>
                                 

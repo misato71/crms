@@ -127,21 +127,25 @@ const createCustomer = async () => {
                 </select>
               </div>
               
+              <!-- メールアドレス -->
               <div class="col-span-12 pl-2">
                 <label for="customer_email" class="mb-1 block text-sm font-medium text-gray-700">メールアドレス</label>
                 <input type="email" id="customer_email" v-model="form.customer_email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="you@email.com" />
               </div>
 
+              <!-- 電話番号 -->
               <div class="col-span-6 pl-2">
                 <label for="customer_phone" class="mb-1 block text-sm font-medium text-gray-700">電話番号</label>
                 <input type="text" id="customer_phone" v-model="form.customer_phone" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
 
+              <!-- 住所 -->
               <div class="col-span-12 pl-2">
                 <label for="customer_address" class="mb-1 block text-sm font-medium text-gray-700">住所</label>
                 <input type="text" id="customer_address" v-model="form.customer_address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
 
+              <!-- 担当者ID -->
               <div class="col-span-4 pl-2">
                 <label for="our_manager" class="mb-1 block text-sm font-medium text-gray-700">担当者ID</label>
                 <input type="number" id="our_manager" v-model="form.our_manager" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />

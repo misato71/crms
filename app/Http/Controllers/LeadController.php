@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Auth;
 class LeadController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * すべてのリード情報を取得、又は検索BOXで入力された場合は、データと一致するリード情報を取得
+     * リード情報の件数を取得
+     * @param　Illuminate\Http\Request $request 検索BOXで入力されたデータ
+     * @param Array $leads 取得したリード情報
+     * @param Number $leadCount リード情報の件数
      */
     public function index(Request $request)
     {
@@ -37,11 +41,18 @@ class LeadController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * リード情報の新規登録機能
+     * @param App\Http\Requests\StoreLeadRequest $request　登録するリード情報
      */
     public function store(StoreLeadRequest $request)
     {
-        //
+        Lead::create([
+            'lead_name' => $request->lead_name,
+            'status' => $request->status,
+            'lead_company' => $request->lead_company,
+            'created_id' => Auth::id(),
+        ]);
+
     }
 
     /**
@@ -69,7 +80,8 @@ class LeadController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * リード情報の削除機能
+     * @param App\Models\Lead $lead　削除するリード情報
      */
     public function destroy(Lead $lead)
     {

@@ -11,7 +11,7 @@ class StoreLeadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreLeadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'lead_name' => ['required', 'string', 'max:50'],
+            'status' => ['nullable', 'integer'],
+            'lead_company' => ['nullable', 'integer'],
         ];
     }
 }
