@@ -6,44 +6,60 @@ import axios from 'axios';
 import { usePage } from '@inertiajs/vue3';
 
 
-// micromodalの閉じるボタン
-const isShow = ref(false)
-const toggleStatus = () => { isShow.value = !isShow.value}
-
-// 顧客登録フォーム
+/**
+ * @type {Object} リード登録情報
+ */
 const form = reactive({
   lead_name: null,
   status: null,
   lead_company: null,
 })
 
-// 初期化
+/**
+ * @type {Object} エラーメッセージ
+ */
+const validationErrors = ref({});
+
+/**
+ * モーダルの初期値
+ * @type {Boolean}　デフォルトはfalse
+ */
+const isShow = ref(false)
+
+/**
+ * @param {Boolean} toggleStatus モーダルを開くか閉じるか切り替え
+ */
+const toggleStatus = () => { isShow.value = !isShow.value}
+
+/**
+ * @param reset 初期化
+ */
 const reset = () => {
   MicroModal.init({
-  disableScroll: true, 
+    disableScroll: true, 
   })
 };
 
-// エラーメッセージ
-const validationErrors = ref({});
-
-// 新規登録　確認ダイアログ
+/**
+ * 新規登録の確認ダイアログ表示
+ */
 const confirmAndCreate = () => {
   const confirmationMessage = "この内容で登録してよろしいですか？";
   if (confirm(confirmationMessage)) {
     createLead();
-  } else {
-    console.log('キャンセル');
   }
 }
 
+/**
+ * リード新規登録コントローラーへ送信
+ */
 const createLead = async () => {
   try {
     const response = await axios.post('/api/leads', form);
 
-    // index画面にリダイレクト
+    // 顧客リード画面に遷移
     router.visit('/leads')
-    
+    // 初期化
     reset()
 
   } catch (error) {
@@ -51,15 +67,18 @@ const createLead = async () => {
       // バリデーションエラーメッセージをセット
       validationErrors.value = error.response.data.errors;
     } else {
-      // その他のエラーハンドリング
-      console.log(error);
-    }
+      // 顧客リード画面に遷移
+      router.visit('/leads')
+      // 初期化
+      reset()
+      }
   }
 };
 
-
 </script>
+
 <template>
+    <!-- モーダルを開く -->
     <div v-show="isShow" class="modal" id="modal-1" aria-hidden="true">
     
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -68,6 +87,7 @@ const createLead = async () => {
           <h2 class="modal__title" id="modal-1-title">
             新規登録
           </h2>
+          <!-- 閉じるボタン -->
           <button @click="toggleStatus" type="button" class="modal__close" aria-label="Close modal" data-micromodal-close></button>
         </header>
         <main class="modal__content" id="modal-1-content">
@@ -112,6 +132,7 @@ const createLead = async () => {
                 <input type="number" id="lead_company" v-model="form.lead_company" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
               
+              <!-- 登録する -->
               <div class="col-span-12 pl-2">
                 <button @click="confirmAndCreate" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">登録する</button>
               </div>
@@ -119,13 +140,16 @@ const createLead = async () => {
           </div>
 
         </main>
+
+        <!-- キャンセルする -->
         <footer class="modal__footer">
-          <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+          <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">キャンセル</button>
         </footer>
       </div>
     </div>
   </div>
 
+  <!-- リード新規登録モーダルを開く -->
   <button @click="toggleStatus" type="button" class="flex ml-auto rounded-full border border-primary-500 bg-violet-500 px-5 py-2.5 text-center text-xs font-medium text-white shadow-sm transition-all hover:border-primary-700 hover:bg-primary-700 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300" data-micromodal-trigger="modal-1" href='javascript:;'>
     <span class="mr-2" aria-hidden="true">+</span>
     新規登録

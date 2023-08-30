@@ -5,12 +5,20 @@ import { reactive } from 'vue';
 import axios from 'axios';
 import { usePage } from '@inertiajs/vue3';
 
-
-// micromodalの閉じるボタン
+/**
+ * モーダルの初期値を設定
+ * @type {Boolean}　デフォルトはfalse
+ */
 const isShow = ref(false)
+
+/**
+ * @param {Boolean} toggleStatus モーダルを開くか閉じるか切り替え
+ */
 const toggleStatus = () => { isShow.value = !isShow.value}
 
-// 顧客登録フォーム
+/**
+ * @type {Object} 顧客登録情報
+ */
 const form = reactive({
   customer_company_name: null,
   customer_manager_name: null,
@@ -21,34 +29,40 @@ const form = reactive({
   our_manager: null,
 })
 
-// 初期化
+/**
+ * @param reset 初期化
+ */
 const reset = () => {
   MicroModal.init({
-  disableScroll: true, 
+    disableScroll: true, 
   })
 };
 
-// エラーメッセージ
+/**
+ * @type {Object} エラーメッセージ
+ */
 const validationErrors = ref({});
 
-
-// 新規登録　確認ダイアログ
+/**
+ * 新規登録の確認ダイアログ表示
+ */
 const confirmAndCreate = () => {
   const confirmationMessage = "この内容で登録してよろしいですか？";
   if (confirm(confirmationMessage)) {
-  createCustomer();
-  } else {
-    console.log('キャンセル');
+    createCustomer();
   }
 }
 
+/**
+ * 顧客新規登録コントローラーーへ送信
+ */
 const createCustomer = async () => {
   try {
     const response = await axios.post('/api/customers', form);
 
-    // index画面にリダイレクト
+    // 顧客一覧画面に遷移
     router.visit('/customers')
-    
+    // 初期化
     reset()
 
   } catch (error) {
@@ -56,15 +70,18 @@ const createCustomer = async () => {
       // バリデーションエラーメッセージをセット
       validationErrors.value = error.response.data.errors;
     } else {
-      // その他のエラーハンドリング
-      console.log(error);
-    }
+      // 顧客一覧画面に遷移
+      router.visit('/customers')
+      // 初期化
+      reset()
+      }
   }
 };
 
-
 </script>
+
 <template>
+    <!-- モーダルを開く -->
     <div v-show="isShow" class="modal" id="modal-1" aria-hidden="true">
     
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -73,6 +90,7 @@ const createCustomer = async () => {
           <h2 class="modal__title" id="modal-1-title">
             新規登録
           </h2>
+          <!-- 閉じるボタン -->
           <button @click="toggleStatus" type="button" class="modal__close" aria-label="Close modal" data-micromodal-close></button>
         </header>
         <main class="modal__content" id="modal-1-content">
@@ -151,6 +169,7 @@ const createCustomer = async () => {
                 <input type="number" id="our_manager" v-model="form.our_manager" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
               
+              <!-- 登録する -->
               <div class="col-span-12 pl-2">
                 <button @click="confirmAndCreate" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">登録する</button>
               </div>
@@ -158,13 +177,15 @@ const createCustomer = async () => {
           </div>
 
         </main>
+        <!-- キャンセルする -->
         <footer class="modal__footer">
-          <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+          <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">キャンセル</button>
         </footer>
       </div>
     </div>
   </div>
 
+  <!-- 新規登録モーダルを開く -->
   <button @click="toggleStatus" type="button" class="flex ml-auto rounded-full border border-primary-500 bg-violet-500 px-5 py-2.5 text-center text-xs font-medium text-white shadow-sm transition-all hover:border-primary-700 hover:bg-primary-700 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300" data-micromodal-trigger="modal-1" href='javascript:;'>
     <span class="mr-2" aria-hidden="true">+</span>
     新規登録

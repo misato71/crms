@@ -96,7 +96,7 @@ class LeadController extends Controller
 
         return to_route('leads.index')
         ->with([
-            'message' => 'リード名を削除しました。',
+            'message' => 'リード情報を削除しました。',
             'status' => 'danger'
         ]);
 

@@ -10,46 +10,63 @@ const props = defineProps({
   lead: Object
 })
 
-// 初期状態は詳細画面を表示
+/**
+ * 初期状態は詳細画面を表示
+ * @type {String} デフォルトは詳細画面
+ */
 const currentModal = ref('show');
 
-// 編集画面へ遷移
+/**
+ * @param {String} switchToEditModal 編集画面へ遷移
+ */
 const switchToEditModal = () => {
   currentModal.value = 'edit';
 };
 
-
-// micromodalの閉じるボタン
+/**
+ * モーダルの初期値を設定
+ * @type {Boolean} デフォルトはfalse
+ */
 const isShow = ref(false)
+
+/**
+ * @param {Boolean} toggleStatus モーダルを開くか閉じるか切り替え
+ */
 const toggleStatus = () => { isShow.value = !isShow.value}
 
-// 顧客編集フォーム
+/**
+ * @type {Object} リード編集情報
+ */
 const form = reactive({
   lead_name: props.lead.lead_name,
   status:  props.lead.status,
   lead_company:  props.lead.lead_company,
 })
 
-// エラーメッセージ
+/**
+ * @type {Object} エラーメッセージ
+ */
 const validationErrors = ref({});
 
-
-// 編集　確認ダイアログ
+/**
+ * 編集の確認ダイアログ表示
+ */
 const confirmAndUpdate = () => {
   const confirmationMessage = "この内容で編集してよろしいですか？";
   if (confirm(confirmationMessage)) {
-  updateLead(props.lead.lead_id);
-  } else {
-    console.log('キャンセル');
+    updateLead(props.lead.lead_id);
   }
 }
 
+/**
+ * リード編集コントローラーーへ送信
+ */
 const updateLead = async (id) => {
   try {
     await axios.put('/api/leads/'+ id, form);
-    // index画面にリダイレクト
+    // 顧客リード画面に遷移
     router.visit('/leads')
-    
+    // 初期化
     reset()
 
   } catch (error) {
@@ -57,22 +74,24 @@ const updateLead = async (id) => {
       // バリデーションエラーメッセージをセット
       validationErrors.value = error.response.data.errors;
     } else {
-      // その他のエラーハンドリング
-      console.log(error);
+      // 顧客リード画面に遷移
+      router.visit('/leads')
+      // 初期化
+      reset()
     }
   }
 };
 
-
-
-
 </script>
+
 <template>
+    <!-- モーダルを開く -->
     <div v-show="isShow" class="modal" id="modal-1" aria-hidden="true">
     
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
       <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
 
+        <!-- 詳細画面-->
         <div v-if="currentModal === 'show'">
 
         <header class="modal__header">
@@ -80,6 +99,7 @@ const updateLead = async (id) => {
             リード詳細
             <p>リードID: {{ lead.lead_id }}</p>
           </h2>
+          <!-- 閉じるボタン -->
           <button @click="toggleStatus" type="button" class="modal__close" aria-label="Close modal" data-micromodal-close></button>
         </header>
 
@@ -120,6 +140,7 @@ const updateLead = async (id) => {
                 </div>
               </div>
               
+              <!-- 編集画面に切り替え -->
               <div class="col-span-12 pl-2">
                 <button @click="switchToEditModal" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">更新</button>
               </div>
@@ -129,6 +150,7 @@ const updateLead = async (id) => {
         </main>
         </div>
 
+        <!-- 編集画面 -->
         <div v-if="currentModal === 'edit'">
 
           <header class="modal__header">
@@ -181,6 +203,7 @@ const updateLead = async (id) => {
                 <input type="number" id="lead_company" v-model="form.lead_company" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
               
+              <!-- 編集する -->
               <div class="col-span-12 pl-2">
                 <button @click="confirmAndUpdate" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">更新する</button>
               </div>
@@ -190,6 +213,7 @@ const updateLead = async (id) => {
           </main>
         </div>
 
+        <!-- キャンセルする -->
         <footer class="modal__footer">
           <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">キャンセル</button>
         </footer>
@@ -197,6 +221,7 @@ const updateLead = async (id) => {
     </div>
   </div>
 
+  <!-- 詳細モーダルを開く -->
   <button @click="toggleStatus" x-data="{ tooltip: 'Edite' }">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />

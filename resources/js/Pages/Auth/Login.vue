@@ -13,11 +13,17 @@ defineProps({
     },
 });
 
+/**
+ * @type {Object} ログインで入力された情報
+ */
 const form = useForm({
     user_id: '',
     staff_password: '',
 });
 
+/**
+ * ログインコントローラーへ送信
+ */
 const submit = () => {
     form.post(route('login'), {
     });
@@ -33,6 +39,8 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit">
+
+            <!-- メールアドレス -->
             <div>
                 <InputLabel for="user_id" value="メールアドレス" />
 
@@ -49,6 +57,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
+            <!-- パスワード -->
             <div class="mt-4">
                 <InputLabel for="staff_password" value="パスワード" />
 

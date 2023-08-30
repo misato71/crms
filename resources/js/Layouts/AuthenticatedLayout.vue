@@ -12,7 +12,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="fixed min-h-screen bg-gray-100">
+        <div class="fixed w-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,7 +59,7 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('register')"> Register </DropdownLink>
+                                        <!-- <DropdownLink :href="route('register')"> Register </DropdownLink> -->
                                         <DropdownLink :href="route('logout')" method="post" onclick="return confirm('ログアウトします。よろしいですか？') " as="button">
                                             Log Out
                                         </DropdownLink>
@@ -140,6 +140,7 @@ const showingNavigationDropdown = ref(false);
                     </div>                    
                     <ul class="mt-6">
                         <li class="relative px-6 py-3">
+                        <!-- 顧客情報 -->
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
                             :href="route('customers.index')"
@@ -162,6 +163,7 @@ const showingNavigationDropdown = ref(false);
                         </a>
                         </li>  
 
+                        <!-- リード情報 -->
                         <li class="relative px-6 py-3">
                         <a
                             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
@@ -179,7 +181,7 @@ const showingNavigationDropdown = ref(false);
                             >
                             <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                             </svg>
-                            <span class="ml-4">リード情報</span>
+                            <span class="ml-4">顧客リード</span>
                         </a>
                         </li>                        
                     </ul>
