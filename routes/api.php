@@ -16,19 +16,28 @@ use App\Http\Controllers\LeadController;
 |
 */
 
+/**
+ * 顧客情報　新規登録
+ */
 Route::middleware('auth:sanctum')
 ->post('/customers', [CustomerController::class, 'store']);
 
+/**
+ * 顧客情報　編集
+ */
 Route::middleware('auth:sanctum')
 ->put('/customers/{customer}', [CustomerController::class, 'update']);
 
+/**
+ * リード情報　新規登録
+ */
 Route::middleware('auth:sanctum')
 ->post('/leads', [LeadController::class, 'store']);
 
+/**
+ * リード情報　編集
+ */
 Route::middleware('auth:sanctum')
 ->put('/leads/{lead}', [LeadController::class, 'update']);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});

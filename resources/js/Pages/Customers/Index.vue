@@ -90,10 +90,7 @@ const sortedCustomers = computed(() => {
 const deleteCustomer = (customer) => {
 	router.delete(route('customers.destroy', { customer: customer }), {
 		onBefore: () => {
-			const confirmationMessage = `
-				リード情報も削除されます。
-				削除された顧客会社は元に戻せません。
-				本当に削除しますか？`;
+			const confirmationMessage = 'リード情報も削除されます。本当に削除しますか？';
 
 			return confirm(confirmationMessage);
 		}

@@ -101,9 +101,7 @@ const sortedLeads = computed(() => {
 const deleteLead = (lead) => {
 	router.delete(route('leads.destroy', { lead: lead }), {
 		onBefore: () => {
-			const confirmationMessage = `
-				削除されたリード情報は元に戻せません。
-				本当に削除しますか？`;
+			const confirmationMessage ='本当に削除しますか？';
 
 			return confirm(confirmationMessage);
 		}
