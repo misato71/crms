@@ -1,66 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CRMS
+「顧客管理システム」
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 1. アプリ概要
+顧客の基本的な情報を管理する為のシステムである。 Web ブラウザ上にて⼊⼒や表⽰を⾏い、DB にデータを保持する。
 
-## About Laravel
+## 2. 技術要素
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 開発環境 Laravel Sail 1.18
+- PHP 8.1
+- Vue 3.2.41
+- MySQL 8.0.32
+- laravel/framework 10.10
+- laravel/breeze 1.21
+- inertiajs/vue3 1.0.0
+- tailwindcss 3.2.1
+- micromodal 0.4.10
+- dayjs 1.11.5
+- バージョン管理 Git 2.34.1 / GitHub
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+##### ※以下のダミーユーザーを使ってログインしてご利用ください。
+- 名前: test
+- メールアドレス: test@test.com
+- パスワード: password123
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 3.データ構成
+- A. ログイン情報
+- B. 顧客情報
+- C. 担当情報
+- D. リード情報
 
-## Learning Laravel
+## 4. 画面構成と処理
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+##### A. ログイン画⾯
+- Laravel Breezeを使用して実装する
+- ID とパスワードを⼊⼒し、⼀覧画⾯に遷移する。
+- もし ID またはパスワードが違っている場合は、エラーメッセージを⾃画⾯に表⽰させる。
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+##### B. 顧客情報画面
+- 顧客情報の⼀覧を表⽰させる。
+- 列をクリックすると選択列で昇順、降順のソートができる
+- 画面内の検索フィールドに入力すると一致する文言を持つ顧客の絞り込みができる
+- ＋アイコンをクリックすると顧客の新規登録モーダルが開く
+- 各行にペンアイコン配置し、クリックするとモーダルが開いて詳細情報を編集できる
+- 各行にゴミ箱アイコンを設置し、クリックするとダイアログを表⽰させ、OK を選択すると、DB から削除し一覧を更新する。
+- 画⾯上にログアウトボタンを配置し、押下するとログアウトする。
+ - ボタン押下で確認ダイアログを表⽰し、OK ボタン押下でログイン画⾯に戻る。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+##### C. リード情報画面
+- 顧客リードの一覧を表示させる
+- 列をクリックすると選択列で昇順、降順のソートができる
+- 画面内の検索フィールドに入力すると一致する文言を持つ顧客リードの絞り込みができる
+- ＋アイコンをクリックすると顧客の新規登録モーダルが開く
+- 新規登録する際には既存の顧客情報から顧客を選択、担当者を担当者情報から選択する
+- 各行にペンアイコン配置し、クリックするとモーダルが開いて詳細情報を編集できる
+- 各行にゴミ箱アイコンを設置し、クリックするとダイアログを表⽰させ、OK を選択すると、DB から削除し一覧を更新する。
+- 画⾯上にログアウトボタンを配置し、押下するとログアウトする。
+ - ボタン押下で確認ダイアログを表⽰し、OK ボタン押下でログイン画⾯に戻る。
 
-## Laravel Sponsors
+※担当者は別のメンバーが画面を作っているためＤＢに予め登録してある人を参照して登録に使用する。
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 著者
+2023/08/30 Harada Misato
