@@ -48,7 +48,7 @@ class LoginInfoController extends Controller
             $request->session()->regenerate();
 
             // return redirect()->intended('dashboard');
-            return Inertia::render('customers.index');
+            return to_route('customers.index');
         }
 
         return back()->withErrors([

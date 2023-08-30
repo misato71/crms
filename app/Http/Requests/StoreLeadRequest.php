@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidCustomer;
+
 
 class StoreLeadRequest extends FormRequest
 {
@@ -11,18 +13,20 @@ class StoreLeadRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * リード情報の新規登録　バリデーション
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'lead_name' => ['required', 'string', 'max:50'],
+            'status' => ['nullable', 'integer'],
+            'lead_company' => ['nullable', 'integer', new ValidCustomer],
         ];
     }
 }

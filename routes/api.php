@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,12 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
 ->put('/customers/{customer}', [CustomerController::class, 'update']);
+
+Route::middleware('auth:sanctum')
+->post('/leads', [LeadController::class, 'store']);
+
+Route::middleware('auth:sanctum')
+->put('/leads/{lead}', [LeadController::class, 'update']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

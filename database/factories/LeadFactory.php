@@ -20,7 +20,7 @@ class LeadFactory extends Factory
         $dummyDate = $this->faker->dateTimeThisMonth;
         
         return [
-            'lead_name' => $this->faker->company,
+            'lead_name' => $this->faker->domainWord,
             'status' => $this->faker->numberBetween(1, 3),
             'lead_company' => function () {
                 // ここで関連するCustomerのIDをランダムに選択

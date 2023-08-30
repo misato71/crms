@@ -20,10 +20,10 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): Response
-    {
-        return Inertia::render('Auth/Register');
-    }
+    // public function create(): Response
+    // {
+    //     return Inertia::render('Auth/Register');
+    // }
 
     /**
      * ログイン情報　新規登録
@@ -32,21 +32,21 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'user_id' => 'required|string|email|max:50|unique:'.LoginInfo::class,
-            'staff_password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        // $request->validate([
+        //     'user_id' => 'required|string|email|max:50|unique:'.LoginInfo::class,
+        //     'staff_password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // ]);
 
-        $user = LoginInfo::create([
-            'user_id' => $request->user_id,
-            'staff_password' => Hash::make($request->staff_password),
-            'created_id' => Auth::id(),
-        ]);
+        // $user = LoginInfo::create([
+        //     'user_id' => $request->user_id,
+        //     'staff_password' => Hash::make($request->staff_password),
+        //     'created_id' => Auth::id(),
+        // ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
     }
 }

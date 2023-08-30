@@ -10,20 +10,33 @@ const props = defineProps({
   customer: Object
 })
 
-// 初期状態は詳細画面を表示
+/**
+ * 初期状態は詳細画面を表示
+ * @type {String} デフォルトは詳細画面
+ */
 const currentModal = ref('show');
 
-// 編集画面へ遷移
+/**
+ * @param {String} switchToEditModal 編集画面へ遷移
+ */
 const switchToEditModal = () => {
   currentModal.value = 'edit';
 };
 
-
-// micromodalの閉じるボタン
+/**
+ * モーダルの初期値を設定
+ * @type {Boolean}　デフォルトはfalse
+ */
 const isShow = ref(false)
+
+/**
+ * @param {Boolean} toggleStatus モーダルを開くか閉じるか切り替え
+ */
 const toggleStatus = () => { isShow.value = !isShow.value}
 
-// 顧客編集フォーム
+/**
+ * @type {Object} 顧客編集情報
+ */
 const form = reactive({
   customer_company_name: props.customer.customer_company_name,
   customer_manager_name:  props.customer.customer_manager_name,
@@ -34,26 +47,30 @@ const form = reactive({
   our_manager:  props.customer.our_manager,
 })
 
-// エラーメッセージ
+/**
+ * @type {Object} エラーメッセージ
+ */
 const validationErrors = ref({});
 
-
-// 編集　確認ダイアログ
+/**
+ * 編集の確認ダイアログ表示
+ */
 const confirmAndUpdate = () => {
   const confirmationMessage = "この内容で編集してよろしいですか？";
   if (confirm(confirmationMessage)) {
-  updateCustomer(props.customer.customer_id);
-  } else {
-    console.log('キャンセル');
+    updateCustomer(props.customer.customer_id);
   }
 }
 
+/**
+ * 顧客情報編集コントローラーへ送信
+ */
 const updateCustomer = async (id) => {
   try {
     await axios.put('/api/customers/'+ id, form);
-    // index画面にリダイレクト
+    // 顧客一覧画面に遷移
     router.visit('/customers')
-    
+    // 初期化
     reset()
 
   } catch (error) {
@@ -61,22 +78,24 @@ const updateCustomer = async (id) => {
       // バリデーションエラーメッセージをセット
       validationErrors.value = error.response.data.errors;
     } else {
-      その他のエラーハンドリング
-      console.log(error);
-    }
+      // 顧客一覧画面に遷移
+      router.visit('/customers')
+      // 初期化
+      reset()
+      }
   }
 };
 
-
-
-
 </script>
+
 <template>
+  <!-- モーダルを表示 -->
     <div v-show="isShow" class="modal" id="modal-1" aria-hidden="true">
     
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
       <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
 
+        <!-- 詳細画面 -->
         <div v-if="currentModal === 'show'">
 
         <header class="modal__header">
@@ -84,6 +103,7 @@ const updateCustomer = async (id) => {
             顧客詳細
             <p>顧客ID: {{ customer.customer_id }}</p>
           </h2>
+          <!-- 閉じるボタン -->
           <button @click="toggleStatus" type="button" class="modal__close" aria-label="Close modal" data-micromodal-close></button>
         </header>
 
@@ -116,6 +136,7 @@ const updateCustomer = async (id) => {
                 </div>
               </div>
               
+              <!-- メールアドレス -->
               <div class="col-span-12 pl-2">
                 <label for="customer_email" class="mb-1 block text-sm font-medium text-gray-700">メールアドレス</label>
                 <div id="customer_email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500">
@@ -123,6 +144,7 @@ const updateCustomer = async (id) => {
                 </div>
               </div>
 
+              <!-- 電話番号 -->
               <div class="col-span-6 pl-2">
                 <label for="customer_phone" class="mb-1 block text-sm font-medium text-gray-700">電話番号</label>
                 <div id="customer_phone" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500">
@@ -130,6 +152,7 @@ const updateCustomer = async (id) => {
                 </div>
               </div>
 
+              <!-- 住所 -->
               <div class="col-span-12 pl-2">
                 <label for="customer_address" class="mb-1 block text-sm font-medium text-gray-700">住所</label>
                 <div id="customer_address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500">
@@ -137,6 +160,7 @@ const updateCustomer = async (id) => {
                 </div>
               </div>
 
+              <!-- 担当者ID -->
               <div class="col-span-4 pl-2">
                 <label for="our_manager" class="mb-1 block text-sm font-medium text-gray-700">担当者ID</label>
                 <div id="our_manager" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500">
@@ -144,6 +168,7 @@ const updateCustomer = async (id) => {
                 </div>
               </div>
 
+              <!-- 更新日時 -->
               <div class="col-span-4 pl-2">
                 <label for="modified_date" class="mb-1 block text-sm font-medium text-gray-700">更新日時</label>
                 <div id="modified_date" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500">
@@ -151,6 +176,7 @@ const updateCustomer = async (id) => {
                 </div>
               </div>
               
+              <!-- 編集画面に切り替え -->
               <div class="col-span-12 pl-2">
                 <button @click="switchToEditModal" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">更新</button>
               </div>
@@ -160,6 +186,7 @@ const updateCustomer = async (id) => {
         </main>
         </div>
 
+        <!-- 編集画面 -->
         <div v-if="currentModal === 'edit'">
 
           <header class="modal__header">
@@ -222,26 +249,31 @@ const updateCustomer = async (id) => {
                 <p>選択された業種: {{ form.customer_type }}</p>
               </div>
               
+              <!-- メールアドレス -->
               <div class="col-span-12 pl-2">
                 <label for="customer_email" class="mb-1 block text-sm font-medium text-gray-700">メールアドレス</label>
                 <input type="email" id="customer_email" v-model="form.customer_email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="you@email.com" />
               </div>
 
+              <!-- 電話番号 -->
               <div class="col-span-6 pl-2">
                 <label for="customer_phone" class="mb-1 block text-sm font-medium text-gray-700">電話番号</label>
                 <input type="text" id="customer_phone" v-model="form.customer_phone" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
 
+              <!-- 住所 -->
               <div class="col-span-12 pl-2">
                 <label for="customer_address" class="mb-1 block text-sm font-medium text-gray-700">住所</label>
                 <input type="text" id="customer_address" v-model="form.customer_address" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
 
+              <!-- 担当者ID -->
               <div class="col-span-4 pl-2">
                 <label for="our_manager" class="mb-1 block text-sm font-medium text-gray-700">担当者ID</label>
                 <input type="number" id="our_manager" v-model="form.our_manager" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500" placeholder="" />
               </div>
               
+              <!-- 編集する -->
               <div class="col-span-12 pl-2">
                 <button @click="confirmAndUpdate" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">更新する</button>
               </div>
@@ -251,6 +283,7 @@ const updateCustomer = async (id) => {
           </main>
         </div>
 
+        <!-- キャンセルする -->
         <footer class="modal__footer">
           <button @click="toggleStatus" type="button" class="modal__btn" data-micromodal-close aria-label="Close this dialog window">キャンセル</button>
         </footer>
@@ -258,6 +291,7 @@ const updateCustomer = async (id) => {
     </div>
   </div>
 
+  <!-- 詳細モーダルを開く -->
   <button @click="toggleStatus" x-data="{ tooltip: 'Edite' }">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6" x-tooltip="tooltip">
         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
