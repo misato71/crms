@@ -42,7 +42,7 @@ const submit = () => {
 
             <!-- メールアドレス -->
             <div>
-                <InputLabel for="user_id" value="メールアドレス" />
+                <InputLabel for="user_id" value="Email Address" />
 
                 <TextInput
                     id="user_id"
@@ -59,7 +59,7 @@ const submit = () => {
 
             <!-- パスワード -->
             <div class="mt-4">
-                <InputLabel for="staff_password" value="パスワード" />
+                <InputLabel for="staff_password" value="Password" />
 
                 <TextInput
                     id="staff_password"
@@ -74,7 +74,7 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-center mt-4">
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     ログイン
                 </PrimaryButton>
             </div>

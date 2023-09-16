@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
-import { ref, computed, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import CreateModal from '@/Components/Customers/CreateModal.vue'
 import ShowModal from '@/Components/Customers/ShowModal.vue'
 import FlashMessage from '@/Components/FlashMessage.vue'
