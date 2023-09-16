@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
-import { ref,computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import CreateModal from '@/Components/Customers/CreateModal.vue'
 import ShowModal from '@/Components/Customers/ShowModal.vue'
 import FlashMessage from '@/Components/FlashMessage.vue'
@@ -11,12 +11,14 @@ import FlashMessage from '@/Components/FlashMessage.vue'
 const props = defineProps({
 	customers: Array,
 	customerCount: Number,
+	filter: String,
 })
 
 /**
  * @type {String} 検索で入力された値をいれる変数
+ * 検索で入力した入力値を表示
  */
-const search = ref('')
+ const search = ref(props.filter)
 
 /**
  * ソート方向のための変数
@@ -38,7 +40,7 @@ const sortKey = ref('')
  * 顧客の検索をする
  */
 const searchCustomers = () => {
-  router.get(route('customers.index', { search: search.value }))
+router.get(route('customers.index', { search: search.value }))
 } 
 
 /**
